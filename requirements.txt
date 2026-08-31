@@ -1,0 +1,6 @@
+pandas>=2.2
+numpy>=2.0
+pytest>=8.0
+psycopg[binary]>=3.2
+SQLAlchemy>=2.0
+matplotlib>=3.9
