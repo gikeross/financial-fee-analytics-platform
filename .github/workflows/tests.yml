@@ -18,6 +18,6 @@ jobs:
       - name: Export Power BI star schema
         run: python src/export_powerbi.py
       - name: Run tests
-        run: pytest -q
+        run: PYTHONPATH=. pytest -q
       - name: Generate portfolio outputs
         run: python src/generate_outputs.py
