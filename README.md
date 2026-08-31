@@ -18,6 +18,7 @@ pip install -r requirements.txt
 python src/generate_data.py --rows 100000 --seed 42
 python src/generate_outputs.py
 python src/export_powerbi.py
+python src/generate_dashboard.py
 pytest -q
 ```
 
@@ -36,7 +37,6 @@ Charts are generated in `assets/`.
 
 ## Next phase
 Build a Power BI semantic model and three report pages: Executive Overview, Product Performance, Fee Exceptions.
-
 
 ## Power BI Layer
 
@@ -57,23 +57,16 @@ data/powerbi/
 └── fact_fee_exceptions.csv
 ```
 
-The small dimension exports are versioned. The large generated fact CSVs are intentionally excluded from Git and recreated locally with `python src/export_powerbi.py`, keeping the repository lightweight and reproducible.
-
+The generated Power BI CSVs are intentionally excluded from Git and recreated locally with `python src/export_powerbi.py`, keeping the repository lightweight and reproducible.
 
 ## Dashboard Preview
 
-The repository includes three dashboard preview pages generated from the deterministic 100,000-transaction dataset.
+The project generates three dashboard preview pages from the deterministic 100,000-transaction dataset with `python src/generate_dashboard.py`. Generated PNGs are intentionally excluded from Git and can be recreated locally.
 
-### Executive Overview
+### Generated pages
 
-![Executive Overview](assets/dashboard/01-executive-overview.png)
-
-### Product Performance
-
-![Product Performance](assets/dashboard/02-product-performance.png)
-
-### Fee Exceptions
-
-![Fee Exceptions](assets/dashboard/03-fee-exceptions.png)
+- Executive Overview
+- Product Performance
+- Fee Exceptions
 
 These previews use the same KPI definitions and star-schema fields documented in the Power BI layer. The final `.pbix` should reproduce this business structure while using native Power BI interactions, slicers, drill-through and DAX.
