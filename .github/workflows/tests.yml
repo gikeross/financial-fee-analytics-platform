@@ -1,0 +1,23 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Generate deterministic dataset
+        run: python src/generate_data.py --rows 5000 --seed 42
+      - name: Export Power BI star schema
+        run: python src/export_powerbi.py
+      - name: Run tests
+        run: pytest -q
+      - name: Generate portfolio outputs
+        run: python src/generate_outputs.py
